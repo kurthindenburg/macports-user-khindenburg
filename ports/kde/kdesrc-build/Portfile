@@ -9,6 +9,7 @@ version             1.15.2
 set gitcommit       f9f472d17716d2f66d27daae108631e51dfa9535
 set perl_version    5.16
 categories          kde
+license             LGPL-3+ GPL-2+ BSD GFDL-1.2+
 platforms           darwin
 maintainers         khindenburg openmaintainer
 description         A tool to allow you to easily build KDE from its source repositories.
