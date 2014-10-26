@@ -2,10 +2,12 @@
 # # $Id$
 
 PortSystem          1.0
-PortGroup           kde4    1.1
+PortGroup           cmake   1.0
 
 name                kdesrc-build
-version             f9f472d17716d2f66d27daae108631e51dfa9535
+version             1.15.2
+set gitcommit       f9f472d17716d2f66d27daae108631e51dfa9535
+set perl_version    5.16
 categories          kde
 platforms           darwin
 maintainers         khindenburg openmaintainer
@@ -17,11 +19,15 @@ homepage            http://kdesrc-build.kde.org
 
 fetch.type          git
 git.url             git://anongit.kde.org/kdesrc-build
-git.branch          ${version}
+git.branch          ${gitcommit}
 
-#depends_build-append    port:kdelibs4
-depends_run-append      path:bin/perl:perl5 \
-                        port:p5.16-json \
-                        port:p5.16-lwp-useragent-determined
+depends_run-append      port:perl${perl_version} \
+                        port:p${perl_version}-json \
+                        port:p${perl_version}-lwp-useragent-determined
+
+post-configure {
+    reinplace "s|#!/usr/bin/env perl|#!${prefix}/bin/perl${perl_version}|g" ${worksrcpath}/${name}
+    reinplace "s|#!/usr/bin/env perl|#!${prefix}/bin/perl${perl_version}|g" ${worksrcpath}/kdesrc-build-setup
+}
 
 livecheck.type  none
