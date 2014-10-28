@@ -27,8 +27,7 @@ depends_run-append      port:perl${perl_version} \
                         port:p${perl_version}-lwp-useragent-determined
 
 post-configure {
-    reinplace "s|#!/usr/bin/env perl|#!${prefix}/bin/perl${perl_version}|g" ${worksrcpath}/${name}
-    reinplace "s|#!/usr/bin/env perl|#!${prefix}/bin/perl${perl_version}|g" ${worksrcpath}/kdesrc-build-setup
+    reinplace -W ${worksrcpath} "s|#!/usr/bin/env perl|#!${prefix}/bin/perl${perl_version}|g" ${name} kdesrc-build-setup
 }
 
 livecheck.type  none
