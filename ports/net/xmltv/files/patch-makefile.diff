@@ -1,0 +1,142 @@
+--- Makefile	2014-11-09 14:55:54.000000000 -0500
++++ Makefile	2014-11-09 15:06:48.000000000 -0500
+@@ -173,6 +173,9 @@
+ 	filter/tv_to_latex \
+ 	filter/tv_to_potatoe \
+ 	filter/tv_to_text \
++	grab/na_dd/tv_grab_na_dd \
++	grab/na_dtv/tv_grab_na_dtv \
++	grab/na_tvmedia/tv_grab_na_tvmedia \
+ 	tools/tv_find_grabbers \
+ 	tools/tv_validate_file \
+ 	tools/tv_validate_grabber
+@@ -546,6 +549,7 @@
+ 
+ manifypods : pure_all  \
+ 	filter/tv_merge \
++	grab/na_dtv/tv_grab_na_dtv \
+ 	tools/tv_validate_file \
+ 	filter/tv_sort \
+ 	filter/tv_count \
+@@ -557,10 +561,12 @@
+ 	filter/tv_extractinfo_ar \
+ 	filter/tv_grep \
+ 	filter/tv_extractinfo_en \
++	grab/na_dd/tv_grab_na_dd \
+ 	filter/tv_cat \
+ 	filter/tv_augment_tz \
+ 	filter/tv_imdb \
+ 	filter/tv_to_latex \
++	grab/na_tvmedia/tv_grab_na_tvmedia \
+ 	filter/tv_to_potatoe \
+ 	lib/ValidateGrabber.pm \
+ 	lib/PreferredMethod.pm \
+@@ -579,6 +585,7 @@
+ 	lib/Configure/Writer.pm
+ 	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) \
+ 	  filter/tv_merge $(INST_MAN1DIR)/tv_merge.$(MAN1EXT) \
++	  grab/na_dtv/tv_grab_na_dtv $(INST_MAN1DIR)/tv_grab_na_dtv.$(MAN1EXT) \
+ 	  tools/tv_validate_file $(INST_MAN1DIR)/tv_validate_file.$(MAN1EXT) \
+ 	  filter/tv_sort $(INST_MAN1DIR)/tv_sort.$(MAN1EXT) \
+ 	  filter/tv_count $(INST_MAN1DIR)/tv_count.$(MAN1EXT) \
+@@ -590,10 +597,12 @@
+ 	  filter/tv_extractinfo_ar $(INST_MAN1DIR)/tv_extractinfo_ar.$(MAN1EXT) \
+ 	  filter/tv_grep $(INST_MAN1DIR)/tv_grep.$(MAN1EXT) \
+ 	  filter/tv_extractinfo_en $(INST_MAN1DIR)/tv_extractinfo_en.$(MAN1EXT) \
++	  grab/na_dd/tv_grab_na_dd $(INST_MAN1DIR)/tv_grab_na_dd.$(MAN1EXT) \
+ 	  filter/tv_cat $(INST_MAN1DIR)/tv_cat.$(MAN1EXT) \
+ 	  filter/tv_augment_tz $(INST_MAN1DIR)/tv_augment_tz.$(MAN1EXT) \
+ 	  filter/tv_imdb $(INST_MAN1DIR)/tv_imdb.$(MAN1EXT) \
+ 	  filter/tv_to_latex $(INST_MAN1DIR)/tv_to_latex.$(MAN1EXT) \
++	  grab/na_tvmedia/tv_grab_na_tvmedia $(INST_MAN1DIR)/tv_grab_na_tvmedia.$(MAN1EXT) \
+ 	  filter/tv_to_potatoe $(INST_MAN1DIR)/tv_to_potatoe.$(MAN1EXT) 
+ 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+ 	  lib/ValidateGrabber.pm $(INST_MAN3DIR)/ValidateGrabber.$(MAN3EXT) \
+@@ -623,6 +632,11 @@
+ filter/tv_grep :: filter/tv_grep.PL pm_to_blib filter/tv_grep.in pm_to_blib
+ 	$(PERLRUNINST) filter/tv_grep.PL filter/tv_grep
+ 
++all :: grab/na_dd/tv_grab_na_dd
++	$(NOECHO) $(NOOP)
++
++grab/na_dd/tv_grab_na_dd :: grab/na_dd/tv_grab_na_dd.PL pm_to_blib grab/na_dd/tv_grab_na_dd.in
++	$(PERLRUNINST) grab/na_dd/tv_grab_na_dd.PL grab/na_dd/tv_grab_na_dd $(PREFIX)/share/xmltv
+ all :: lib/Supplement.pm
+ 	$(NOECHO) $(NOOP)
+ 
+@@ -647,21 +661,22 @@
+ 
+ # --- MakeMaker installbin section:
+ 
+-EXE_FILES = filter/tv_augment_tz filter/tv_extractinfo_en filter/tv_extractinfo_ar filter/tv_grep filter/tv_sort filter/tv_to_latex filter/tv_to_text filter/tv_to_potatoe filter/tv_cat filter/tv_split filter/tv_imdb filter/tv_remove_some_overlapping filter/tv_count filter/tv_merge tools/tv_validate_grabber tools/tv_validate_file tools/tv_find_grabbers
++EXE_FILES = filter/tv_augment_tz filter/tv_extractinfo_en filter/tv_extractinfo_ar filter/tv_grep filter/tv_sort filter/tv_to_latex filter/tv_to_text filter/tv_to_potatoe filter/tv_cat filter/tv_split filter/tv_imdb filter/tv_remove_some_overlapping filter/tv_count filter/tv_merge tools/tv_validate_grabber tools/tv_validate_file tools/tv_find_grabbers grab/na_dd/tv_grab_na_dd  grab/na_dtv/tv_grab_na_dtv grab/na_tvmedia/tv_grab_na_tvmedia
+ 
+-pure_all :: $(INST_SCRIPT)/tv_merge $(INST_SCRIPT)/tv_validate_file $(INST_SCRIPT)/tv_sort $(INST_SCRIPT)/tv_count $(INST_SCRIPT)/tv_remove_some_overlapping $(INST_SCRIPT)/tv_validate_grabber $(INST_SCRIPT)/tv_find_grabbers $(INST_SCRIPT)/tv_split $(INST_SCRIPT)/tv_to_text $(INST_SCRIPT)/tv_extractinfo_ar $(INST_SCRIPT)/tv_grep $(INST_SCRIPT)/tv_extractinfo_en $(INST_SCRIPT)/tv_cat $(INST_SCRIPT)/tv_augment_tz $(INST_SCRIPT)/tv_imdb $(INST_SCRIPT)/tv_to_latex $(INST_SCRIPT)/tv_to_potatoe pure_plaindoc pure_share
++pure_all :: $(INST_SCRIPT)/tv_merge $(INST_SCRIPT)/tv_grab_na_dtv $(INST_SCRIPT)/tv_validate_file $(INST_SCRIPT)/tv_sort $(INST_SCRIPT)/tv_count $(INST_SCRIPT)/tv_remove_some_overlapping $(INST_SCRIPT)/tv_validate_grabber $(INST_SCRIPT)/tv_find_grabbers $(INST_SCRIPT)/tv_split $(INST_SCRIPT)/tv_to_text $(INST_SCRIPT)/tv_extractinfo_ar $(INST_SCRIPT)/tv_grep $(INST_SCRIPT)/tv_extractinfo_en $(INST_SCRIPT)/tv_grab_na_dd $(INST_SCRIPT)/tv_cat $(INST_SCRIPT)/tv_augment_tz $(INST_SCRIPT)/tv_imdb $(INST_SCRIPT)/tv_to_latex $(INST_SCRIPT)/tv_grab_na_tvmedia $(INST_SCRIPT)/tv_to_potatoe pure_plaindoc pure_share
+ 	$(NOECHO) $(NOOP)
+ 
+ realclean ::
+ 	$(RM_F)  realclean_plaindoc  realclean_share \
+-	  $(INST_SCRIPT)/tv_merge $(INST_SCRIPT)/tv_validate_file \
++	  $(INST_SCRIPT)/tv_grab_na_dtv $(INST_SCRIPT)/tv_validate_file \
+ 	  $(INST_SCRIPT)/tv_sort $(INST_SCRIPT)/tv_count \
+ 	  $(INST_SCRIPT)/tv_remove_some_overlapping $(INST_SCRIPT)/tv_validate_grabber \
+ 	  $(INST_SCRIPT)/tv_find_grabbers $(INST_SCRIPT)/tv_split \
+ 	  $(INST_SCRIPT)/tv_to_text $(INST_SCRIPT)/tv_extractinfo_ar \
+ 	  $(INST_SCRIPT)/tv_grep $(INST_SCRIPT)/tv_extractinfo_en \
+-	  $(INST_SCRIPT)/tv_cat $(INST_SCRIPT)/tv_augment_tz \
+-	  $(INST_SCRIPT)/tv_imdb $(INST_SCRIPT)/tv_to_latex \
++	  $(INST_SCRIPT)/tv_grab_na_dd $(INST_SCRIPT)/tv_cat \
++	  $(INST_SCRIPT)/tv_augment_tz $(INST_SCRIPT)/tv_imdb \
++	  $(INST_SCRIPT)/tv_to_latex $(INST_SCRIPT)/tv_grab_na_tvmedia \
+ 	  $(INST_SCRIPT)/tv_to_potatoe 
+ 
+ $(INST_SCRIPT)/tv_merge : filter/tv_merge $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+@@ -670,6 +685,12 @@
+ 	$(FIXIN) $(INST_SCRIPT)/tv_merge
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/tv_merge
+ 
++$(INST_SCRIPT)/tv_grab_na_dtv : grab/na_dtv/tv_grab_na_dtv $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
++	$(NOECHO) $(RM_F) $(INST_SCRIPT)/tv_grab_na_dtv
++	$(CP) grab/na_dtv/tv_grab_na_dtv $(INST_SCRIPT)/tv_grab_na_dtv
++	$(FIXIN) $(INST_SCRIPT)/tv_grab_na_dtv
++	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/tv_grab_na_dtv
++
+ $(INST_SCRIPT)/tv_validate_file : tools/tv_validate_file $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+ 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/tv_validate_file
+ 	$(CP) tools/tv_validate_file $(INST_SCRIPT)/tv_validate_file
+@@ -736,6 +757,12 @@
+ 	$(FIXIN) $(INST_SCRIPT)/tv_extractinfo_en
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/tv_extractinfo_en
+ 
++$(INST_SCRIPT)/tv_grab_na_dd : grab/na_dd/tv_grab_na_dd $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
++	$(NOECHO) $(RM_F) $(INST_SCRIPT)/tv_grab_na_dd
++	$(CP) grab/na_dd/tv_grab_na_dd $(INST_SCRIPT)/tv_grab_na_dd
++	$(FIXIN) $(INST_SCRIPT)/tv_grab_na_dd
++	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/tv_grab_na_dd
++
+ $(INST_SCRIPT)/tv_cat : filter/tv_cat $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+ 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/tv_cat
+ 	$(CP) filter/tv_cat $(INST_SCRIPT)/tv_cat
+@@ -760,6 +787,12 @@
+ 	$(FIXIN) $(INST_SCRIPT)/tv_to_latex
+ 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/tv_to_latex
+ 
++$(INST_SCRIPT)/tv_grab_na_tvmedia : grab/na_tvmedia/tv_grab_na_tvmedia $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
++	$(NOECHO) $(RM_F) $(INST_SCRIPT)/tv_grab_na_tvmedia
++	$(CP) grab/na_tvmedia/tv_grab_na_tvmedia $(INST_SCRIPT)/tv_grab_na_tvmedia
++	$(FIXIN) $(INST_SCRIPT)/tv_grab_na_tvmedia
++	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/tv_grab_na_tvmedia
++
+ $(INST_SCRIPT)/tv_to_potatoe : filter/tv_to_potatoe $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+ 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/tv_to_potatoe
+ 	$(CP) filter/tv_to_potatoe $(INST_SCRIPT)/tv_to_potatoe
+@@ -845,6 +878,8 @@
+ 
+ 	-$(RM_F) lib/Supplement.pm
+ 
++	-$(RM_F) grab/na_dd/tv_grab_na_dd
++
+ 
+ # --- MakeMaker realclean_subdirs section:
+ realclean_subdirs :
