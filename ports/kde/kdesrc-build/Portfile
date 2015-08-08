@@ -6,8 +6,9 @@ PortGroup           cmake   1.0
 
 name                kdesrc-build
 version             1.15.2
+revision            1
 set gitcommit       f9f472d17716d2f66d27daae108631e51dfa9535
-set perl_version    5.16
+set perl_version    5.22
 categories          kde
 license             LGPL-3+ GPL-2+ BSD GFDL-1.2+
 platforms           darwin
