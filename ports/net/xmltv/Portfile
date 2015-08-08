@@ -7,6 +7,7 @@ PortGroup           perl5 1.0
 
 name                xmltv
 version             0.5.66
+revision            1
 categories          net perl
 license             GPL-2+
 platforms           darwin
@@ -23,16 +24,17 @@ use_bzip2           yes
 checksums           rmd160  0563a22e16e401a71ff19334ff3d0f04a8d03835 \
                     sha256  220a06f032e898b6d2b854fc5c651365969f50f4e2df3767983eaa573e683e8e
 
-set perl_version    5.16
+set perl_version    5.22
 perl5.branches      ${perl_version}
 
 depends_lib-append  port:perl${perl_version} \
                     port:p${perl_version}-datemanip \
                     port:p${perl_version}-datetime \
-                    port:p${perl_version}-libxml-perl \
+                    port:p${perl_version}-file-slurp \
                     port:p${perl_version}-soap-lite \
                     port:p${perl_version}-term-readkey \
                     port:p${perl_version}-xml-libxml \
+                    port:p${perl_version}-xml-treepp \
                     port:p${perl_version}-xml-twig \
                     port:p${perl_version}-xml-writer
 
@@ -41,34 +43,6 @@ configure.pre_args  Makefile.PL
 # Otherwise all binaries are in libexec/perl5.16/sitebin/
 configure.args      INSTALLSITEBIN=${prefix}/bin INSTALLSITESCRIPT=${prefix}/bin
 
-# By default, 'perl Makefile.PL' asks the user which tv grabbers to install.
-# Ignore that and enable the na (North America) grabbers.
-post-configure {
-    set file ${worksrcpath}/Makefile
-    system "patch ${file} < ${filespath}/patch-makefile.diff"
-}
+patchfiles          patch-makefile.diff
 
-#Archive::Zip             (if you want to run tv_grab_uk_bleb)
-#CGI                      (if you want to run tv_pick_cgi)
-#Compress::Zlib           (if you want to run tv_grab_se_swedb)
-#Data::Dumper             (if you want to run tv_grab_dk_dr)
-#DateTime                 (if you want to run tv_grab_dk_dr)
-#HTML::Parser 3.34        (for grabbers which use HTML::Entities)
-#HTML::TableExtract       (if you want to run tv_grab_na_icons)
-#HTML::TreeBuilder        (for many of the grabbers)
-#HTTP::Cache::Transparent (for several of the grabbers)
-#HTTP::Cookies            (if you want to run tv_grab_br_net)
-#IO::File                 (if you want to run tv_grab_fr)
-#IO::Scalar               (if you want to run tv_grab_uk_bleb, tv_grab_in)
-#IO::Stringy              (if you want to run tv_grab_se_swedb)
-#JSON                     (if you want to run tv_grab_fi)
-#Parse::RecDescent        (if you want to run tv_grab_dk_dr)
-#SOAP::Lite               (if you want to run tv_grab_na_dd)
-#Term::ReadKey            (if you want to run tv_grab_na_dd)
-#Text::Kakasi             (if you want to run tv_grab_jp)
-#Tk                       (if you want to run tv_check)
-#Tk::TableMatrix          (if you want to run tv_check)
-#WWW::Mechanize           (if you want to run tv_grab_na_icons, tv_grab_br_net)
-#XML::LibXML              (if you want to run tv_grab_se_swedb, tv_grab_in)
-#Unicode::UTF8simple      (if you want to run tv_grab_pt)
 
