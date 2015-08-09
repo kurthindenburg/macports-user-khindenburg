@@ -1,0 +1,50 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           github 1.0
+
+github.setup        Krazy-collection krazy 28b622941c740c548395d1d185013212c2496492
+version             20150712
+set perl_version    5.22
+categories          devel
+platforms           darwin
+license             GPL-2
+maintainers         khindenburg openmaintainer
+
+description         sanity check your source code
+long_description    \
+    Krazy scans source code looking for issues that should be fixed \
+    for reasons of policy, good coding practice, optimization, or any other \
+    good reason.
+
+checksums           rmd160  ce794f1bea0eae2ef72d07dd1bf4c6b777fd3181 \
+                    sha256  5e023a3aa27c314997281353995bc22ba57d48d0ccec12a5db2a373a457d7989
+
+build.cmd           ./install.sh ${destroot}${prefix}
+build.target
+
+depends_build-append    port:qt4-mac \
+                        port:p${perl_version}-extutils-makemaker
+
+
+depends_lib-append  port:perl5 \
+                    port:perl${perl_version} \
+                    port:p${perl_version}-tie-ixhash \
+                    port:p${perl_version}-yaml \
+                    port:p${perl_version}-xml-libxml \
+                    port:p${perl_version}-xml-parser
+
+use_configure       no
+
+# build's ./install.sh puts files in destroot
+destroot {}
+post-destroot {
+    file delete ${destroot}${prefix}/lib/perl5/${perl_version}/darwin-thread-multi-2level/perllocal.pod
+    file mkdir ${destroot}${prefix}/share/${name}
+    file copy ${destroot}${prefix}/conf/settings.yaml ${destroot}${prefix}/share/${name}
+    file delete ${destroot}${prefix}/conf/settings.yaml
+
+}
+
+livecheck.type      none
