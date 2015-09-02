@@ -6,8 +6,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 name                xmltv
-version             0.5.66
-revision            1
+version             0.5.67
 categories          net perl
 license             GPL-2+
 platforms           darwin
@@ -21,8 +20,8 @@ homepage            http://wiki.xmltv.org/index.php/XMLTVProject
 master_sites        sourceforge:/project/xmltv/xmltv/${version}
 use_bzip2           yes
 
-checksums           rmd160  0563a22e16e401a71ff19334ff3d0f04a8d03835 \
-                    sha256  220a06f032e898b6d2b854fc5c651365969f50f4e2df3767983eaa573e683e8e
+checksums           rmd160  f8a6a0c57d718e5af3f58ded6df005b620c2de0a \
+                    sha256  f5ee784961be2a35035d55ef39bcba0ccfd7aecfa5359c1a890cb411c1c7a694
 
 set perl_version    5.22
 perl5.branches      ${perl_version}
@@ -43,6 +42,7 @@ configure.pre_args  Makefile.PL
 # Otherwise all binaries are in libexec/perl5.16/sitebin/
 configure.args      INSTALLSITEBIN=${prefix}/bin INSTALLSITESCRIPT=${prefix}/bin
 
-patchfiles          patch-makefile.diff
+patchfiles          patch-makefile.diff \
+                    patch-prompt-makefile.diff
 
-
+livecheck.regex     xmltv/files/xmltv/(\[0-9.\]+)
