@@ -4,9 +4,9 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Krazy-collection krazy 28b622941c740c548395d1d185013212c2496492
-version             20150712
-set perl_version    5.22
+github.setup        Krazy-collection krazy e0183af
+version             20160828
+set perl_version    5.24
 categories          devel
 platforms           darwin
 license             GPL-2
@@ -18,24 +18,32 @@ long_description    \
     for reasons of policy, good coding practice, optimization, or any other \
     good reason.
 
-checksums           rmd160  ce794f1bea0eae2ef72d07dd1bf4c6b777fd3181 \
-                    sha256  5e023a3aa27c314997281353995bc22ba57d48d0ccec12a5db2a373a457d7989
+checksums           rmd160  5345eb13e0e2940dbd29950cbdc6c312f8996989 \
+                    sha256  37468995e1ae1c4e6ac3c0cd589a74771e57cc1a9b6bcd69f51625fd16d111e6
 
+patchfiles          patch-perlversion.diff \
+                    patch-qmakeversion.diff
+
+#build.cmd           QMAKE=/opt/local/bin/qmake-qt5 ./install.sh ${destroot}${prefix}
 build.cmd           ./install.sh ${destroot}${prefix}
 build.target
 
-depends_build-append    port:qt4-mac \
-                        port:p${perl_version}-extutils-makemaker
+#depends_build-append    port:qt4-mac 
+depends_build-append    port:p${perl_version}-extutils-makemaker
 
 
-depends_lib-append  port:perl5 \
-                    port:perl${perl_version} \
+depends_lib-append  port:perl${perl_version} \
+                    port:p${perl_version}-html-parser \
                     port:p${perl_version}-tie-ixhash \
                     port:p${perl_version}-yaml \
                     port:p${perl_version}-xml-libxml \
                     port:p${perl_version}-xml-parser
 
 use_configure       no
+
+post-patch {
+    reinplace -W ${worksrcpath} "s|__PERL__|${prefix}/bin/perl${perl_version}|g" install.sh
+}
 
 # build's ./install.sh puts files in destroot
 destroot {}

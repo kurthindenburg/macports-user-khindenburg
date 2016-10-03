@@ -1,0 +1,20 @@
+--- install.sh	2016-08-20 11:34:13.000000000 -0400
++++ install.sh	2016-10-03 16:11:23.000000000 -0400
+@@ -10,7 +10,7 @@
+ 
+ #bootstrap by checking that the MakeMaker module is installed
+ module="ExtUtils::MakeMaker"
+-perl -M$module -e 1 2> /dev/null
++__PERL__ -M$module -e 1 2> /dev/null
+ status=$?
+ if ( test $status -ne 0 ) then
+   echo "Cannot locate the $module Perl module"
+@@ -79,7 +79,7 @@
+ 
+ #install user-interface scripts
+ #perl Makefile.PL PREFIX=$TOP
+-perl Makefile.PL INSTALLSITESCRIPT=$TOP/bin INSTALLSITEBIN=$TOP/bin INSTALLSITELIB=$TOP/lib PREFIX=$TOP
++__PERL__ Makefile.PL INSTALLSITESCRIPT=$TOP/bin INSTALLSITEBIN=$TOP/bin INSTALLSITELIB=$TOP/lib PREFIX=$TOP
+ stat=$?
+ if ( test $stat -ne 0 ) then
+   exit $stat
