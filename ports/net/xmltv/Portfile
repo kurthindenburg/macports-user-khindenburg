@@ -6,7 +6,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 name                xmltv
-version             0.5.67
+version             0.5.68
 categories          net perl
 license             GPL-2+
 platforms           darwin
@@ -20,10 +20,10 @@ homepage            http://wiki.xmltv.org/index.php/XMLTVProject
 master_sites        sourceforge:/project/xmltv/xmltv/${version}
 use_bzip2           yes
 
-checksums           rmd160  f8a6a0c57d718e5af3f58ded6df005b620c2de0a \
-                    sha256  f5ee784961be2a35035d55ef39bcba0ccfd7aecfa5359c1a890cb411c1c7a694
+checksums           rmd160  808b4930c1bb25ec2a517fff2fab4a256f2f0666 \
+                    sha256  ed6589118943f1028b318dea2cd30c395c41b8abc9bbf106b3787f095d79919d
 
-set perl_version    5.22
+set perl_version    5.24
 perl5.branches      ${perl_version}
 
 depends_lib-append  port:perl${perl_version} \
@@ -37,12 +37,13 @@ depends_lib-append  port:perl${perl_version} \
                     port:p${perl_version}-xml-twig \
                     port:p${perl_version}-xml-writer
 
-configure.cmd       ${prefix}/bin/perl${perl_version}
-configure.pre_args  Makefile.PL
-# Otherwise all binaries are in libexec/perl5.16/sitebin/
-configure.args      INSTALLSITEBIN=${prefix}/bin INSTALLSITESCRIPT=${prefix}/bin
-
-patchfiles          patch-makefile.diff \
-                    patch-prompt-makefile.diff
+configure {
+    # Use EOF to agree to questions - for now agree to what it finds
+    # Use INSTALLSITE* otherwise all binaries are in libexec/perl5.16/sitebin
+    system -W ${worksrcpath} "${prefix}/bin/perl${perl_version} Makefile.PL \
+        INSTALLSITEBIN=${prefix}/bin INSTALLSITESCRIPT=${prefix}/bin << EOF
+yes
+EOF"
+}
 
 livecheck.regex     xmltv/files/xmltv/(\[0-9.\]+)
