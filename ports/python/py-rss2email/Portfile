@@ -7,7 +7,7 @@ PortGroup           python 1.0
 set realname        rss2email
 name                py-rss2email
 version             3.9
-python.versions     34
+python.versions     34 35 36
 license             GPL-2
 platforms           darwin
 supported_archs     noarch
