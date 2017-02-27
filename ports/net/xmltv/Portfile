@@ -6,7 +6,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 name                xmltv
-version             0.5.68
+version             0.5.69
 categories          net perl
 license             GPL-2+
 platforms           darwin
@@ -20,8 +20,8 @@ homepage            http://wiki.xmltv.org/index.php/XMLTVProject
 master_sites        sourceforge:/project/xmltv/xmltv/${version}
 use_bzip2           yes
 
-checksums           rmd160  808b4930c1bb25ec2a517fff2fab4a256f2f0666 \
-                    sha256  ed6589118943f1028b318dea2cd30c395c41b8abc9bbf106b3787f095d79919d
+checksums           rmd160  76f905a04ac18e0ab24237bd81304d7c689782c7 \
+                    sha256  3d795783fec745a398be710c4ace8828c1cc3d3582cd1c2a21658291986eccad
 
 set perl_version    5.24
 perl5.branches      ${perl_version}
@@ -44,6 +44,10 @@ configure {
         INSTALLSITEBIN=${prefix}/bin INSTALLSITESCRIPT=${prefix}/bin << EOF
 yes
 EOF"
+}
+
+post-destroot {
+    delete {*}[glob ${destroot}${prefix}/lib/perl5/*/*/perllocal.pod]
 }
 
 livecheck.regex     xmltv/files/xmltv/(\[0-9.\]+)
