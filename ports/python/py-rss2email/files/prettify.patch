@@ -1,0 +1,42 @@
+From f8d92335b2f1050acbe0d4ed72d80400f394a891 Mon Sep 17 00:00:00 2001
+From: martin f krafft <madduck@debian.org>
+Date: Mon, 23 Nov 2015 21:27:52 +0100
+Subject: [PATCH] Fix prettify post-process hook
+Bug-Debian: https://bugs.debian.org/805241
+Forwarded: https://github.com/wking/rss2email/pull/73
+
+The prettify hook does not work out of the box, since it references the `feed`
+variable which is not available in the `pretty` function.
+
+This was reported in the following bug:
+
+https://bugs.debian.org/805241
+
+Signed-off-by: Etienne Millon <me@emillon.org>
+---
+ rss2email/post_process/prettify.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+--- a/rss2email/post_process/prettify.py
++++ b/rss2email/post_process/prettify.py
+@@ -62,9 +62,10 @@
+ 
+ # import modules you need
+ from bs4 import BeautifulSoup
++import rss2email.email
+ 
+ 
+-def pretty(message):
++def pretty(feed, parsed, entry, guid, message):
+     """Use BeautifulSoup to pretty-print the html
+ 
+     A very simple function that decodes the entry into a unicode
+@@ -93,7 +94,7 @@
+ 
+ 
+ def process(feed, parsed, entry, guid, message):
+-    message = pretty(message)
++    message = pretty(feed, parsed, entry, guid, message)
+     # you could add several filters in here if you want to
+ 
+     # we need to return the message, if we return False,
