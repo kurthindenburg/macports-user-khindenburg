@@ -7,6 +7,7 @@ PortGroup           python 1.0
 set realname        rss2email
 name                py-rss2email
 version             3.9
+revision            1
 python.versions     34 35 36
 license             GPL-2
 platforms           darwin
@@ -24,6 +25,15 @@ python.link_binaries_suffix
 
 checksums           rmd160  bfd69ad1b6c9751f552ac7bba31dc3556964a826 \
                     sha256  2557a8042021dfbdba7d8a7777a4135f08c342bde98318d442d50b56e14f920b
+
+patch.pre_args -p1
+patchfiles          833114.patch \
+                    dont-overwrite-config.patch \
+                    content-type-warning.patch \
+                    prettify.patch \
+                    detect_v2_database.patch \
+                    document-config.patch \
+                    sslv3.patch
 
 if {${name} eq ${subport}} {
     livecheck.type  regex
