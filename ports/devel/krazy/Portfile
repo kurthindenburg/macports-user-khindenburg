@@ -3,9 +3,9 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Krazy-collection krazy e0183af
-version             20160828
-set perl_version    5.24
+github.setup        Krazy-collection krazy 535e1019a16bcaa0c180f465013cc01166df0fec
+version             20171207
+set perl_version    5.26
 categories          devel
 platforms           darwin
 license             GPL-2
@@ -17,22 +17,20 @@ long_description    \
     for reasons of policy, good coding practice, optimization, or any other \
     good reason.
 
-checksums           rmd160  5345eb13e0e2940dbd29950cbdc6c312f8996989 \
-                    sha256  37468995e1ae1c4e6ac3c0cd589a74771e57cc1a9b6bcd69f51625fd16d111e6
+checksums           rmd160  c10dd7e8f8f11b538c99fcf62790221856629b72 \
+                    sha256  b91f7cfd301679cb5b9d007c96527f8e131c2a3c2cd9c8806de9a2ac7ff2f177
 
 patchfiles          patch-perlversion.diff \
                     patch-qmakeversion.diff
 
-#build.cmd           QMAKE=/opt/local/bin/qmake-qt5 ./install.sh ${destroot}${prefix}
 build.cmd           ./install.sh ${destroot}${prefix}
 build.target
 
-#depends_build-append    port:qt4-mac 
 depends_build-append    port:p${perl_version}-extutils-makemaker
-
 
 depends_lib-append  port:perl${perl_version} \
                     port:p${perl_version}-html-parser \
+                    port:p${perl_version}-json \
                     port:p${perl_version}-tie-ixhash \
                     port:p${perl_version}-yaml \
                     port:p${perl_version}-xml-libxml \
@@ -53,5 +51,3 @@ post-destroot {
     file delete ${destroot}${prefix}/conf/settings.yaml
 
 }
-
-livecheck.type      none
