@@ -15,11 +15,11 @@ maintainers         khindenburg openmaintainer
 description         A python script that converts RSS/Atom newsfeeds to email
 long_description    ${description}
 
-homepage            http://pypi.python.org/pypi/${realname}/
-master_sites        http://pypi.python.org/packages/source/[string index ${realname} 0]/${realname}/
+homepage            https://pypi.python.org/pypi/${realname}/
+master_sites        https://pypi.python.org/packages/source/[string index ${realname} 0]/${realname}/
 distname            ${realname}-${version}
 
-python.default_version 34
+python.default_version 36
 python.link_binaries_suffix
 
 checksums           rmd160  bfd69ad1b6c9751f552ac7bba31dc3556964a826 \
