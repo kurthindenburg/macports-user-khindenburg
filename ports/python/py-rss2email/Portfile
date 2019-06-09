@@ -7,7 +7,7 @@ set realname        rss2email
 name                py-rss2email
 version             3.9
 revision            1
-python.versions     34 35 36
+python.versions     35 36 37
 license             GPL-2
 platforms           darwin
 supported_archs     noarch
@@ -19,7 +19,7 @@ homepage            https://pypi.python.org/pypi/${realname}/
 master_sites        https://pypi.python.org/packages/source/[string index ${realname} 0]/${realname}/
 distname            ${realname}-${version}
 
-python.default_version 36
+python.default_version 37
 python.link_binaries_suffix
 
 checksums           rmd160  bfd69ad1b6c9751f552ac7bba31dc3556964a826 \
