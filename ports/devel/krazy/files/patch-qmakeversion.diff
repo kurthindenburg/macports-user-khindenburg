@@ -6,7 +6,7 @@
  
 -qmakever=`$QMAKE -query QT_VERSION`
 +#Hack
-+qmakever=5.6.0
++qmakever=5.9.7
  if ( test `echo $qmakever | grep -ic unknown` -eq 0 )
  then
    qmake_majver=`echo $qmakever | cut -d. -f1`

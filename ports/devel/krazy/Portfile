@@ -3,9 +3,9 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Krazy-collection krazy 535e1019a16bcaa0c180f465013cc01166df0fec
-version             20171207
-set perl_version    5.26
+github.setup        Krazy-collection krazy 0614f7e
+version             20190523
+set perl_version    5.28
 categories          devel
 platforms           darwin
 license             GPL-2
@@ -17,8 +17,9 @@ long_description    \
     for reasons of policy, good coding practice, optimization, or any other \
     good reason.
 
-checksums           rmd160  c10dd7e8f8f11b538c99fcf62790221856629b72 \
-                    sha256  b91f7cfd301679cb5b9d007c96527f8e131c2a3c2cd9c8806de9a2ac7ff2f177
+checksums           rmd160  0af41ca87ae09ff3a55cb8e525f9aa12a687ed9c \
+                    sha256  a9875e75d118c1771b9ac25ae6f25ee863acce63a4d063e2d76022bf406db462 \
+                    size    550543
 
 patchfiles          patch-perlversion.diff \
                     patch-qmakeversion.diff
@@ -26,7 +27,8 @@ patchfiles          patch-perlversion.diff \
 build.cmd           ./install.sh ${destroot}${prefix}
 build.target
 
-depends_build-append    port:p${perl_version}-extutils-makemaker
+depends_build-append    port:p${perl_version}-extutils-makemaker \
+                        port:autoconf
 
 depends_lib-append  port:perl${perl_version} \
                     port:p${perl_version}-html-parser \
@@ -51,3 +53,6 @@ post-destroot {
     file delete ${destroot}${prefix}/conf/settings.yaml
 
 }
+
+# For now ignore updates
+livecheck.type      none
