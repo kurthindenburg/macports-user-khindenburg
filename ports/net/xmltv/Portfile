@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 name                xmltv
-version             0.5.69
+version             0.5.70
 categories          net perl
 license             GPL-2+
 platforms           darwin
@@ -19,14 +19,15 @@ homepage            http://wiki.xmltv.org/index.php/XMLTVProject
 master_sites        sourceforge:/project/xmltv/xmltv/${version}
 use_bzip2           yes
 
-checksums           rmd160  76f905a04ac18e0ab24237bd81304d7c689782c7 \
-                    sha256  3d795783fec745a398be710c4ace8828c1cc3d3582cd1c2a21658291986eccad
+checksums           rmd160  a3a0305340fa81db2c8c8d197e9aba8c5fd43883 \
+                    sha256  237b03dc33668c46ed2e275b91739ca01e7f5a5c2ee63679d9bbb7f8d0bd6b6d \
+                    size    1274164
 
-set perl_version    5.24
+set perl_version    5.28
 perl5.branches      ${perl_version}
 
 depends_lib-append  port:perl${perl_version} \
-                    port:p${perl_version}-datemanip \
+                    port:p${perl_version}-date-manip \
                     port:p${perl_version}-datetime \
                     port:p${perl_version}-file-slurp \
                     port:p${perl_version}-soap-lite \
