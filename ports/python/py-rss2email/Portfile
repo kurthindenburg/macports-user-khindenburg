@@ -5,9 +5,9 @@ PortGroup           python 1.0
 
 set realname        rss2email
 name                py-rss2email
-version             3.9
-revision            1
-python.versions     35 36 37
+version             3.11
+revision            0
+python.versions     35 36 37 38
 license             GPL-2
 platforms           darwin
 supported_archs     noarch
@@ -22,17 +22,9 @@ distname            ${realname}-${version}
 python.default_version 37
 python.link_binaries_suffix
 
-checksums           rmd160  bfd69ad1b6c9751f552ac7bba31dc3556964a826 \
-                    sha256  2557a8042021dfbdba7d8a7777a4135f08c342bde98318d442d50b56e14f920b
-
-patch.pre_args -p1
-patchfiles          833114.patch \
-                    dont-overwrite-config.patch \
-                    content-type-warning.patch \
-                    prettify.patch \
-                    detect_v2_database.patch \
-                    document-config.patch \
-                    sslv3.patch
+checksums           rmd160  bd9d6e7e2a393a7fa4bf60d67e1a20b670ceabc6 \
+                    sha256  36c3bdb279cca8ab64c64e41af025d02963fb09ff84530240eacc22a2ed565ee \
+                    size    68020
 
 if {${name} eq ${subport}} {
     livecheck.type  regex
@@ -48,6 +40,6 @@ if {${name} eq ${subport}} {
 
 post-destroot {
     xinstall -m 644 -W ${worksrcpath} \
-        CHANGELOG AUTHORS COPYING README \
+        CHANGELOG AUTHORS COPYING README.rst \
         ${destroot}${prefix}/share/doc/${subport}
 }
