@@ -3,8 +3,8 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Krazy-collection krazy 0614f7e
-version             20190523
+github.setup        Krazy-collection krazy 726577d
+version             20210205
 set perl_version    5.28
 categories          devel
 platforms           darwin
@@ -17,15 +17,15 @@ long_description    \
     for reasons of policy, good coding practice, optimization, or any other \
     good reason.
 
-checksums           rmd160  0af41ca87ae09ff3a55cb8e525f9aa12a687ed9c \
-                    sha256  a9875e75d118c1771b9ac25ae6f25ee863acce63a4d063e2d76022bf406db462 \
-                    size    550543
+checksums           rmd160  d52404b55bc02129df6ace14a597f20e2ea51cac \
+                    sha256  ef0662043336c39c68d4029174f6d770204c12153e9c04831477b6904b271630 \
+                    size    484959
 
-patchfiles          patch-perlversion.diff \
-                    patch-qmakeversion.diff
+patchfiles          patch-perlversion.diff
 
 build.cmd           ./install.sh ${destroot}${prefix}
 build.target
+build.env-append    "QMAKE=${prefix}/libexec/qt5/bin/qmake"
 
 depends_build-append    port:p${perl_version}-extutils-makemaker \
                         port:autoconf
@@ -36,7 +36,8 @@ depends_lib-append  port:perl${perl_version} \
                     port:p${perl_version}-tie-ixhash \
                     port:p${perl_version}-yaml \
                     port:p${perl_version}-xml-libxml \
-                    port:p${perl_version}-xml-parser
+                    port:p${perl_version}-xml-parser \
+                    port:qt5-qtbase
 
 use_configure       no
 
@@ -54,5 +55,3 @@ post-destroot {
 
 }
 
-# For now ignore updates
-livecheck.type      none
