@@ -43,3 +43,5 @@ post-destroot {
         CHANGELOG AUTHORS COPYING README.rst \
         ${destroot}${prefix}/share/doc/${subport}
 }
+
+livecheck.type  none
