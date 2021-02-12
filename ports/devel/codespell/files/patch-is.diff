@@ -1,0 +1,11 @@
+--- codespell_lib/_codespell.py	2017-03-14 08:33:03.000000000 -0400
++++ codespell_lib/_codespell.py	2020-10-02 22:40:02.000000000 -0400
+@@ -522,7 +522,7 @@
+ 
+     dictionaries = options.dictionary or [default_dictionary]
+     for dictionary in dictionaries:
+-        if dictionary is "-":
++        if dictionary == "-":
+             dictionary = default_dictionary
+         if not os.path.exists(dictionary):
+             print('ERROR: cannot find dictionary file: %s' % dictionary,
