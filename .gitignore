@@ -6,3 +6,4 @@ Portfile~
 *.diff~
 *.patch~
 .DS_Store
+.Portfile.swp
