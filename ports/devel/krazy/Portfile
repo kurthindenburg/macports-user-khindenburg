@@ -5,6 +5,7 @@ PortGroup           github 1.0
 
 github.setup        Krazy-collection krazy 3ec125f
 version             20220104
+revision            1
 set perl_version    5.28
 categories          devel
 platforms           darwin
@@ -21,7 +22,8 @@ checksums           rmd160  58a7b67508fd1a1191188ebf741b94d5607a47ed \
                     sha256  cc0d1a4bbb728c975ee8fb68749066f4a23c3449c0b3d0310e6e31ff37cdd49a \
                     size    485476
 
-patchfiles          patch-perlversion.diff
+patchfiles          patch-perlversion.diff \
+                    patch-add-lgpl2.0only.diff
 
 build.cmd           ./install.sh ${destroot}${prefix}
 build.target

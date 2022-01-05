@@ -1,0 +1,10 @@
+--- plugins/general/license	2021-10-25 13:20:32.000000000 -0400
++++ plugins/general/license	2022-01-04 18:45:15.000000000 -0500
+@@ -302,6 +302,7 @@
+   my($spdx) = @_;
+   my($license) = "";
+   #NOTE: the input string has some punctuation (esp. '-') removed
++  $license = $license . " LGPL (v2.1)" if ($spdx =~ m/LGPL2.0only/);
+   $license = $license . " LGPL (v2.1)" if ($spdx =~ m/LGPL2.1only/);
+   $license = $license . " LGPL (v3.0)" if ($spdx =~ m/LGPL3.0only/);
+   $license = $license . " LGPL (v3+KDEev)" if ($spdx =~ m/LicenseRefKDEAcceptedLGPL/);
