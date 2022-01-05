@@ -4,7 +4,7 @@
    my($spdx) = @_;
    my($license) = "";
    #NOTE: the input string has some punctuation (esp. '-') removed
-+  $license = $license . " LGPL (v2.1)" if ($spdx =~ m/LGPL2.0only/);
++  $license = $license . " LGPL (v2.0)" if ($spdx =~ m/LGPL2.0only/);
    $license = $license . " LGPL (v2.1)" if ($spdx =~ m/LGPL2.1only/);
    $license = $license . " LGPL (v3.0)" if ($spdx =~ m/LGPL3.0only/);
    $license = $license . " LGPL (v3+KDEev)" if ($spdx =~ m/LicenseRefKDEAcceptedLGPL/);
