@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           python 1.0
+PortGroup           github 1.0
+
+github.setup        fsfe reuse-tool 0.14.0 v
+name                py-reuse-tool
+revision            0
+
+platforms           darwin
+supported_archs     noarch
+license             CC-BY-SA-4.0
+maintainers         {khindenburg @kurthindenburg} openmaintainer
+
+description         a tool for compliance with the REUSE recommendations
+long_description    ${description}
+
+checksums           rmd160  1d1b314df187f734a628e021e09a968596652ee1 \
+                    sha256  094cde3c68baa25d690fbb7dd582cc6428147f536dab83697c97398b9fdbeea6 \
+                    size    178692
+
+python.versions     37 38 39 310
+
+if {${name} ne ${subport}} {
+    depends_build-append    port:py${python.version}-setuptools_scm
+
+    depends_lib-append  port:py${python.version}-requests \
+                        port:py${python.version}-boolean.py \
+                        port:py${python.version}-binaryornot
+
+    livecheck.type  none
+}
