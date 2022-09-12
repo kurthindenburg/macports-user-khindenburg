@@ -4,7 +4,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           github 1.0
 
-github.setup        bastikr boolean.py 3.8 v
+github.setup        bastikr boolean.py 4.0 v
 name                py-boolean.py
 revision            0
 
@@ -18,14 +18,21 @@ long_description    ${description}. It \
     defines two base elements, TRUE and FALSE, and a Symbol class that can \
     take on one of these two values.
 
-checksums           rmd160  f7a93bd70c84db087c504d43ef163091e34aa65a \
-                    sha256  ac7477a1374566cec8d2b525c8fb0b0b21c6acffa12381ff6cda277d60eb2e06 \
-                    size    32084
+checksums           rmd160  773883e670037f452ff19df84fbe468a5cb1bb7f \
+                    sha256  4f821d2911a32cd33293c743cadf5528de7cfaef075bf9a88ac8ff5c7994cc08 \
+                    size    33881
 
 python.versions     37 38 39 310
 
 if {${name} ne ${subport}} {
     depends_build-append    port:py${python.version}-setuptools
+
+    depends_test-append port:py${python.version}-pytest \
+                        port:py${python.version}-tox
+
+    test.run        yes
+    test.cmd        tox-${python.branch}
+    test.env        PYTHONPATH=${worksrcpath}/build/lib
 
     livecheck.type  none
 }
