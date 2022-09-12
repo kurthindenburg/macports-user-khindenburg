@@ -4,7 +4,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           github 1.0
 
-github.setup        nexB license-expression 21.6.14 v
+github.setup        nexB license-expression 30.0.0 v
 name                py-license-expression
 revision            0
 
@@ -18,9 +18,9 @@ long_description    A comprehensive utility library to parse, compare, \
     simplify and normalize license expressions (such as SPDX license \
     expressions) using boolean logic.
 
-checksums           rmd160  031cdc3f3f993af4b12517ab98a6f451347092d5 \
-                    sha256  1cdac28037b1841f978bfdb726053314ed1e653e1dd75b3a6f1bd47215b6723e \
-                    size    107783
+checksums           rmd160  b7b2b627ea007de1c42854163d769a1e77de41be \
+                    sha256  ba1c9d603e9b2d24dd309477ea04f3346ec761ede69efd2f5ed5a495efa74be4 \
+                    size    153648
 
 python.versions     37 38 39 310
 
