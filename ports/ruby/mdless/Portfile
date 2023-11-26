@@ -1,0 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           ruby 1.0
+PortGroup           python 1.0
+
+ruby.branches       3.2 3.1 3.0 2.7
+ruby.setup          mdless 2.0.17 gem
+revision            0
+categories          ruby
+license             MIT
+platforms           any
+supported_archs     noarch
+
+maintainers         {khindenburg @kurthindenburg} openmaintainer
+
+description         A pager like less, but for Markdown files
+long_description    a utility that provides a formatted and highlighted\
+                    view of Markdown files in a terminal.
+homepage            https://brettterpstra.com/projects/mdless/
+
+checksums           rmd160  a93de4065ada71935df6bba3a4d0b1f8c67ea440 \
+                    sha256  32bd1ad812b75cfdfbc51e479a8c70c6b5b02b8389901ba94b109c86e1f77a63 \
+                    size    23552
+
+# required ATM
+# gem install --user-install redcarpet -v 3.6.0
+# gem install --user-install tty-which  -v 0.5
