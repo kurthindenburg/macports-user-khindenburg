@@ -3,12 +3,11 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Krazy-collection krazy 35b777b
-version             20231011
+github.setup        Krazy-collection krazy add3df3
+version             20250729
 revision            0
 set perl_version    5.34
 categories          devel
-platforms           darwin
 license             GPL-2
 maintainers         khindenburg openmaintainer
 
@@ -18,9 +17,9 @@ long_description    \
     for reasons of policy, good coding practice, optimization, or any other \
     good reason.
 
-checksums           rmd160  20b2078100f9033b0e634ef2d8fe39fbb71563fb \
-                    sha256  b69d222bfe6900b3963551ea98cb87085aa2edb9fb498b75fda51183ea501d19 \
-                    size    487766
+checksums           rmd160  a23f0b8185ea5a53cbf3e284d020300bb19cf298 \
+                    sha256  80a15bc272d0d2fbc32e05edc3ac6d913941dcc4b4d80b25d8657bc20de7eeef \
+                    size    487603
 
 patchfiles          patch-perlversion.diff \
                     patch-add-lgpl2.0only.diff
