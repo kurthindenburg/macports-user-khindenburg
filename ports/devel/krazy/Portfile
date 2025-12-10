@@ -3,8 +3,8 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Krazy-collection krazy add3df3
-version             20250729
+github.setup        Krazy-collection krazy 0b9b1d1
+version             20250608
 revision            0
 set perl_version    5.34
 categories          devel
@@ -17,9 +17,9 @@ long_description    \
     for reasons of policy, good coding practice, optimization, or any other \
     good reason.
 
-checksums           rmd160  a23f0b8185ea5a53cbf3e284d020300bb19cf298 \
-                    sha256  80a15bc272d0d2fbc32e05edc3ac6d913941dcc4b4d80b25d8657bc20de7eeef \
-                    size    487603
+checksums           rmd160  89ebd0242df0635d46412d4a08a3e8cc3138fbe7 \
+                    sha256  c918a54ecc917e7f5cbc5c58346c672a865f1c72e124fed65f71a9350348c1c6 \
+                    size    487658
 
 patchfiles          patch-perlversion.diff \
                     patch-add-lgpl2.0only.diff
